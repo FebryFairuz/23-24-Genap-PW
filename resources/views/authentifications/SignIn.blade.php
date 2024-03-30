@@ -80,11 +80,11 @@
         console.log(username, password);
 
         if (username === "" || password === "") {
-            alert("Username dan Password tidak boleh kosong!");
+            alert("Username or Password is required!");
         }else if(username === "febrid@ibik.ac.id" && password === "ibik123"){
-            alert("Welcome");
+            alert("Welcome !");
         }else{
-            alert("Sorry, we don't recognise this email address. Try again.");
+            alert("Username or password you enterd is incorrect!");
         }
     }
 </script>
