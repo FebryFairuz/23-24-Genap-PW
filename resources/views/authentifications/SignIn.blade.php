@@ -69,6 +69,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="d-flex flex-center flex-column-auto p-5">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-muted text-hover-primary px-2">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-muted text-hover-primary px-2">Contact Us</a>
+                </li>
+            </ul>
+
+        </div>
     </div>
 </body>
 
