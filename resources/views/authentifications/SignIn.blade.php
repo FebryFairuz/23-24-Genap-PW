@@ -30,7 +30,7 @@
     <div class="container w-550px">
         <div class="card">
             <div class="card-body">
-                <form action="" method="post">
+                <form action="" method="post" onsubmit="SignSubmit(event)">
                     <div class="text-center mb-10">
                         <h1 class="text-center">Sign In to Bedtime Stories</h1>
                         <div class="text-gray-400 fw-bold fs-4">
@@ -39,14 +39,14 @@
                     </div>
                     <div class="form-group mb-5">
                         <label class="required fw-bolder">Email</label>
-                        <input type="email" class="form-control" required placeholder="name@example.com">
+                        <input id="email" type="email" class="form-control" placeholder="name@example.com">
                     </div>
                     <div class="form-group mb-10">
                         <div class="d-flex justify-content-between align-items-center">
                             <label class="required fw-bolder">Password</label>
                             <a href="{{ url('sign-up') }}" class="text-info fw-bolder">Forgot password ?</a>
                         </div>
-                        <input type="password" class="form-control" required placeholder="Password">
+                        <input id="password" type="password" class="form-control" placeholder="Password">
                     </div>
 
                     <div class="d-grid">
@@ -71,5 +71,22 @@
         </div>
     </div>
 </body>
+
+<script>
+    const SignSubmit = (e) => {
+        e.preventDefault();
+        var username = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        console.log(username, password);
+
+        if (username === "" || password === "") {
+            alert("Username dan Password tidak boleh kosong!");
+        }else if(username === "febrid@ibik.ac.id" && password === "ibik123"){
+            alert("Welcome");
+        }else{
+            alert("Sorry, we don't recognise this email address. Try again.");
+        }
+    }
+</script>
 
 </html>
