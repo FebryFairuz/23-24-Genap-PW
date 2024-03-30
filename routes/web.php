@@ -1,10 +1,6 @@
 <?php
 
-// use App\Http\Controllers\KAPertemuan4;
-// use App\Http\Controllers\Pertemuan1Controller;
-// use App\Http\Controllers\Pertemuan3;
-
-use App\Http\Controllers\SignInController;
+use App\Http\Controllers\Pertemuan5;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,7 +8,23 @@ Route::get('/', function(){
     return view('welcome');
 });
 
-Route::get('/sign-in', [SignInController::class, 'index' ]);
+Route::get('/pertemuan-5', [Pertemuan5::class, 'index']);
+Route::get('/pertemuan-5/latihan-pb', [Pertemuan5::class, 'LatihanPB']);
+Route::get('/pertemuan-5/latihan-pa', [Pertemuan5::class, 'LatihanPA']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Route::get('/ka-pertemuan-4', function(){
 //     return "Hello";
