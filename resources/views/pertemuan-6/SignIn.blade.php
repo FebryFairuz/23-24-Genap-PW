@@ -35,7 +35,7 @@
             </div>
             <div class="card w-100 w-lg-400px">
                 <div class="card-body">
-                    <form action="" method="post" onsubmit="SignSubmit(event)">
+                    <form action="" method="post" onsubmit="SignSubmit(event)" id="form-sign-in">
                         <div class="text-center mb-10">
                             <h1>Bedtime Stories</h1>
                             <div class="text-gray-400 fw-bold fs-4">
@@ -45,17 +45,25 @@
                         <div class="form-group mb-5">
                             <label class="required fw-bolder">Email</label>
                             <input id="email" type="email" class="form-control" placeholder="name@example.com">
+                            <small class="text-danger error-email"></small>
                         </div>
                         <div class="form-group mb-10">
                             <div class="d-flex justify-content-between align-items-center">
                                 <label class="required fw-bolder">Password</label>
                                 <a href="{{ url('sign-up') }}" class="text-warning fw-bolder">Forgot password ?</a>
                             </div>
-                            <input id="password" type="password" class="form-control" placeholder="Password">
+                            <div class="input-group">
+                                <input id="password" type="password" class="form-control border-end-0" placeholder="Password">
+                                <button class="input-group-text bg-white" type="button" onclick="TooglePassword()">
+                                    <i id="eye-icon" class="bi bi-eye"></i>
+                                </button>
+                            </div>
+
+                            <small class="text-danger error-password"></small>
                         </div>
 
                         <div class="d-grid">
-                            <button class="btn btn-lg btn-warning" type="submit">Sign In</button>
+                            <button class="btn btn-lg btn-warning btn-submit fw-bolder" type="submit">Sign In</button>
                         </div>
                     </form>
 
@@ -79,18 +87,53 @@
 </body>
 
 <script>
+    const txtEmail = document.getElementById('email');
+    const txtPass = document.getElementById('password');
+
+    const TooglePassword = () => {
+        const eyeIcon = document.getElementById('eye-icon');
+        if (txtPass.type === "password") {
+            txtPass.type = "text";
+            eyeIcon.classList.remove('bi-eye');
+            eyeIcon.classList.add('bi-eye-slash');
+        } else {
+            txtPass.type = "password";
+            eyeIcon.classList.remove('bi-eye-slash');
+            eyeIcon.classList.add('bi-eye');
+        }
+    }
+
     const SignSubmit = (e) => {
         e.preventDefault();
-        var username = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-        console.log(username, password);
+        var formid = e.target.id;
+        var target = document.getElementById(formid);
+        var myButton = target.getElementsByClassName("btn-submit")[0];
+        const errorMsgUsername = target.getElementsByClassName("error-email")[0];
+        const errorMsgPassword = target.getElementsByClassName("error-password")[0];
 
-        if (username === "" || password === "") {
-            alert("Username or Password is required!");
+        var username = txtEmail.value;
+        var password = txtPass.value;
+
+        myButton.textContent = "Loading...";
+        myButton.disabled = true;
+
+        if (username === "") {
+            errorMsgUsername.textContent = "Username is required!";
+            myButton.textContent = "Sign In";
+            myButton.disabled = false;
+        }else if(password === ""){
+            errorMsgPassword.textContent = "Password is required!";
+            myButton.textContent = "Sign In";
+            myButton.disabled = false;
         } else if (username === "febrid@ibik.ac.id" && password === "ibik123") {
+            errorMsgUsername.textContent = "";
+            errorMsgPassword.textContent = "";
+            myButton.textContent = "Success Sign In";
             alert("Welcome !");
         } else {
             alert("Username or password you enterd is incorrect!");
+            myButton.textContent = "Sign In";
+            myButton.disabled = false;
         }
     }
 </script>
