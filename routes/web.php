@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthControllers;
 use App\Http\Controllers\Pertemuan5;
 use Illuminate\Support\Facades\Route;
 
@@ -8,23 +9,11 @@ Route::get('/', function(){
     return view('welcome');
 });
 
+Route::get('/sign-in', [AuthControllers::class, 'signIn']);
+
 Route::get('/pertemuan-5', [Pertemuan5::class, 'index']);
 Route::get('/pertemuan-5/latihan-pb', [Pertemuan5::class, 'LatihanPB']);
 Route::get('/pertemuan-5/latihan-pa', [Pertemuan5::class, 'LatihanPA']);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Route::get('/ka-pertemuan-4', function(){
 //     return "Hello";
