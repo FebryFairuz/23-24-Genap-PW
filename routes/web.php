@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\AuthControllers;
 use App\Http\Controllers\Pertemuan5;
+use App\Http\Controllers\Pertemuan6;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function(){
-    return view('welcome');
-});
-
-Route::get('/sign-in', [AuthControllers::class, 'signIn']);
+Route::get('/', [Pertemuan6::class, 'index']);
+Route::get('/sign-in', [Pertemuan6::class, 'index']);
+Route::get('/sign-in/pa', [Pertemuan6::class, 'signInPA']);
+Route::get('/sign-in/pb', [Pertemuan6::class, 'signInPB']);
+Route::post('/sign-in', [Pertemuan6::class, 'postSignIn']);
 
 Route::get('/pertemuan-5', [Pertemuan5::class, 'index']);
 Route::get('/pertemuan-5/latihan-pb', [Pertemuan5::class, 'LatihanPB']);

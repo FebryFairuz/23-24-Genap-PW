@@ -24,6 +24,12 @@
 
     <link href="{{ url('./assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
+    <style>
+        body{
+            background-color: #0d2142
+        }
+    </style>
+
 </head>
 
 <body>
@@ -36,6 +42,7 @@
             <div class="card w-100 w-lg-400px">
                 <div class="card-body">
                     <form action="" method="post" onsubmit="SignSubmit(event)" id="form-sign-in">
+                        @csrf
                         <div class="text-center mb-10">
                             <h1>Bedtime Stories</h1>
                             <div class="text-gray-400 fw-bold fs-4">
@@ -44,7 +51,7 @@
                         </div>
                         <div class="form-group mb-5">
                             <label class="required fw-bolder">Email</label>
-                            <input id="email" type="email" class="form-control" placeholder="name@example.com">
+                            <input id="email" type="email" class="form-control" placeholder="name@example.com" name="email">
                             <small class="text-danger error-email"></small>
                         </div>
                         <div class="form-group mb-10">
@@ -53,7 +60,7 @@
                                 <a href="{{ url('sign-up') }}" class="text-warning fw-bolder">Forgot password ?</a>
                             </div>
                             <div class="input-group">
-                                <input id="password" type="password" class="form-control border-end-0" placeholder="Password">
+                                <input id="password" type="password" class="form-control border-end-0" placeholder="Password" name="password">
                                 <button class="input-group-text bg-white" type="button" onclick="TooglePassword()">
                                     <i id="eye-icon" class="bi bi-eye"></i>
                                 </button>
@@ -128,8 +135,12 @@
         } else if (username === "febrid@ibik.ac.id" && password === "ibik123") {
             errorMsgUsername.textContent = "";
             errorMsgPassword.textContent = "";
-            myButton.textContent = "Success Sign In";
-            alert("Welcome !");
+            setTimeout(() => {
+                myButton.textContent = "Success Sign In";
+                alert("Welcome !");
+                //target.submit();
+            }, 1000);
+
         } else {
             alert("Username or password you enterd is incorrect!");
             myButton.textContent = "Sign In";
