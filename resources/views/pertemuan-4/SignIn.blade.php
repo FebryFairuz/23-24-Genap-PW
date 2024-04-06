@@ -138,7 +138,7 @@
             setTimeout(() => {
                 myButton.textContent = "Success Sign In";
                 alert("Welcome !");
-                //target.submit();
+                target.submit();
             }, 1000);
 
         } else {
