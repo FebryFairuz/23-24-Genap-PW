@@ -1,8 +1,20 @@
 <?php
 
+use App\Http\Controllers\BooksController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Pertemuan5;
 use App\Http\Controllers\Pertemuan6;
+use App\Models\Categories;
 use Illuminate\Support\Facades\Route;
+
+
+Route::get('/home', function(){
+    return view('pertemuan-7.admin_temp.Home');
+});
+Route::get('/profile', function(){
+    return view('pertemuan-7.admin_temp.Profile');
+});
 
 
 Route::get('/', [Pertemuan6::class, 'index']);
@@ -11,6 +23,25 @@ Route::get('/sign-in/pa', [Pertemuan6::class, 'signInPA']);
 Route::get('/sign-in/pb', [Pertemuan6::class, 'signInPB']);
 Route::post('/sign-in', [Pertemuan6::class, 'postSignIn']);
 
+Route::controller(BooksController::class)->group(function () {
+    Route::get('/catalog-books', 'index');
+    Route::get('/catalog-books/create', 'create');
+    Route::post('/catalog-books/create', 'store');
+    Route::get('/catalog-books/detail', 'show');
+});
+
+Route::controller(CategoriesController::class)->group(function () {
+    Route::get('/categories-books', 'index');
+    Route::get('/categories-books/create', 'create');
+    Route::post('/categories-books/create', 'store');
+    Route::get('/categories-books/detail', 'show');
+});
+Route::controller(UsersController::class)->group(function () {
+    Route::get('/users-books', 'index');
+    Route::get('/users-books/create', 'create');
+    Route::post('/users-books/create', 'store');
+    Route::get('/users-books/detail', 'show');
+});
 Route::get('/pertemuan-5', [Pertemuan5::class, 'index']);
 Route::get('/pertemuan-5/latihan-pb', [Pertemuan5::class, 'LatihanPB']);
 Route::get('/pertemuan-5/latihan-pa', [Pertemuan5::class, 'LatihanPA']);
