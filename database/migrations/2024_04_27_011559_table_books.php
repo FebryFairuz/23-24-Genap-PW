@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('story');
             $table->tinyInteger('is_active');
             $table->timestamps();
+            $table->float('rating',3,1);
         });
     }
 

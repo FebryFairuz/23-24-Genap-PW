@@ -30,7 +30,8 @@ class BooksController extends Controller
             'sinopsis' => $request->sinopsis,
             'story' => $request->story,
             'is_active' => 1,
-            'image' => $newFilename
+            'image' => $newFilename,
+            'rating' => $request->rating
         );
         $result = Books::create($dataPost);
 

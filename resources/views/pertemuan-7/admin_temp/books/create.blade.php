@@ -32,6 +32,10 @@
                         <label>Image Cover</label>
                         <input type="file" required class="form-control" name="image" />
                     </div>
+                    <div class="form-group mb-5">
+                        <label>Rating</label>
+                        <input type="number" required class="form-control" name="rating" />
+                    </div>
 
                     <div class="text-end mt-20 mb-10">
                         <button class="py-5 px-10 btn btn-lg btn-light" type="reset">Clear</button>

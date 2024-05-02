@@ -7,8 +7,15 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(Books $book){
+    public function index(Books $book)
+    {
         $book = Books::all();
-        return view('pertemuan-7.admin_temp.Home', ["books" => $book]);
+        $booksByCreatedAt = Books::orderByDesc('created_at')->limit(2)->get();
+        $booksByRating = Books::orderByDesc('rating')->where('rating', '>', 3)->limit(2)->get();
+        return view('pertemuan-7.admin_temp.Home', [
+            "books" => $book,
+            "booksByCreatedAt" => $booksByCreatedAt,
+            "booksByRating" => $booksByRating
+        ]);
     }
 }

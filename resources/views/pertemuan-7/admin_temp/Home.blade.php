@@ -8,7 +8,7 @@
             <h4 class="fs-1 my-10">Recently</h4>
             <div class="d-flex flex-row" style = "overflow-x:scroll">
                 @if (count($books) > 0)
-                    @foreach ($books as $book)
+                    @foreach ($booksByCreatedAt as $book)
                         <div class="me-8 d-block">
                             <div style = "height:36vh; width:24vh;">
                                 <img class="w-100 rounded" src="{{ url('/assets/media/uploads/books/' . $book->image) }}">
@@ -42,7 +42,7 @@
             <h4>Popular</h4>
             <div class="d-flex flex-row" style = "overflow-x:scroll">
                 @if (count($books) > 0)
-                    @foreach ($books as $book)
+                    @foreach ($booksByRating as $book)
                         <div class="me-8 d-block">
                             <div style = "height:36vh; width:24vh;">
                                 <img class="w-100 rounded" src="{{ url('/assets/media/uploads/books/' . $book->image) }}">
