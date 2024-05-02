@@ -22,7 +22,7 @@
             </div>
         </div>
         <div>
-            <h4>Recommended</h4>
+            <h4 class="fs-1 my-10">Recommended</h4>
             <div class="d-flex flex-row" style = "overflow-x:scroll">
                 @if (count($books) > 0)
                     @foreach ($books as $book)
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div>
-            <h4>Popular</h4>
+            <h4 class="fs-1 my-10">Popular</h4>
             <div class="d-flex flex-row" style = "overflow-x:scroll">
                 @if (count($books) > 0)
                     @foreach ($booksByRating as $book)
