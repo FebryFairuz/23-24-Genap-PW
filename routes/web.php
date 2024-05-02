@@ -41,6 +41,9 @@ Route::controller(UsersController::class)->group(function () {
     Route::get('/users-books/create', 'create');
     Route::post('/users-books/create', 'store');
     Route::get('/users-books/detail', 'show');
+    Route::get('/users-books/delete/{users}', 'destroy');
+    Route::get('/users-books/update/{users}', 'edit');
+    Route::post('/users-books/update/{users}/edit', 'update');
 });
 Route::get('/pertemuan-5', [Pertemuan5::class, 'index']);
 Route::get('/pertemuan-5/latihan-pb', [Pertemuan5::class, 'LatihanPB']);

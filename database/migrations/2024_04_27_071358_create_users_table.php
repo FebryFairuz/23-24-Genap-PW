@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email', 25);
             $table->string('password', 20);
             $table->string('no_hp', 15);
+            $table->string('image', 255);
             $table->timestamps();
         });
     }

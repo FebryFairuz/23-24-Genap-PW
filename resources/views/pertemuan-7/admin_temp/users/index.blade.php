@@ -24,6 +24,7 @@
             <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
                 <thead>
                     <tr class="fs-7 fw-bold">
+                        <th>Profile Picture</th>
                         <th>Username</th>
                         <th>Fullname</th>
                         <th>Gender</th>
@@ -39,6 +40,11 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>
+                                    <img class="w-100px rounded"
+                                            src="{{ url('/assets/media/uploads/users/' . $user->image) }}"
+                                            alt="{{ $user->username }}">
+                                </td>
+                                <td>
                                     {{ $user->username }}
                                 </td>
                                 <td>{{ $user->fullname }}</td>
@@ -49,13 +55,16 @@
                                 <td>{{ $user->created_at }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button class="btn btn-sm btn-icon" type="button">
+                                        <a href="/users-books/delete/{{$user->id}}">
+                                        <button class="btn btn-sm btn-icon" type="button" onclick="return confirm('Apakah data tersebut mau dihapus?')">
                                             <i class="bi bi-trash text-danger"></i>
                                         </button>
+                                        </a>
+                                        <a href="/users-books/update/{{$user->id}}">
                                         <button class="btn btn-sm btn-icon" type="button">
                                             <i class="bi bi-pencil text-warning"></i>
                                         </button>
-                                    </div>
+                                        </a>
                                 </td>
                             </tr>
                         @endforeach
