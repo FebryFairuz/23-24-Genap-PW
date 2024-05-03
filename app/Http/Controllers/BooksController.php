@@ -3,42 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Models\Books;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $books = Books::all();
         return view("pertemuan-7.admin_temp.books.index")->with([
-            'books'=>$books
+            'books' => $books
         ]);
     }
 
-    public function create(){
-        return view("pertemuan-7.admin_temp.books.create");
+    public function create()
+    {
+        $categories = Categories::all(); // Mengambil semua kategori dari database
+
+        return view("pertemuan-7.admin_temp.books.create", compact('categories'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $file= $request->file('image');
-            $newFilename = time()."-".preg_replace('/\s+/', '-', $request->title).".jpg";
+            $file = $request->file('image');
+            $newFilename = time() . "-" . preg_replace('/\s+/', '-', $request->title) . ".jpg";
             $file->move(public_path('./assets/media/uploads/books'), $newFilename);
         }
-        $dataPost = array(
-            'title' => $request->title,
-            'author' => $request->author,
-            'sinopsis' => $request->sinopsis,
-            'story' => $request->story,
-            'is_active' => 1,
-            'image' => $newFilename
-        );
-        $result = Books::create($dataPost);
+        $book = new Books;
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->sinopsis = $request->sinopsis;
+        $book->story = $request->story;
+        $book->is_active = 1;
+        $book->image = $newFilename;
+        $book->save();
 
-        if($result){
-            $message = "Successfully saved";
-        }else{
-            $message = "Failed save";
-        }
+        $book->categories()->attach($request->input('categories'));
+
+        $message = $book ? "Successfully saved" : "Failed save";
         return redirect()->to('catalog-books')->withErrors('info', $message);
     }
 }

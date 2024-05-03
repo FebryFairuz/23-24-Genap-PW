@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateCategoriesRequest;
+use App\Models\Books;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 
@@ -13,18 +14,18 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Categories::all();
-        return view("pertemuan-7.admin_temp.categories.index")->with([
-            'categories'=>$categories
-        ]);
+        $books = Books::all(); // Assuming you have a Book model
+        $categories = Categories::all(); // Assuming you have a Category model
+        return view("pertemuan-7.admin_temp.categories.index", compact('books', 'categories'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+public function create()
     {
-        return view("pertemuan-7.admin_temp.categories.create");
+        $categories = Categories::all(); // Assuming you have a Category model
+        return view("pertemuan-7.admin_temp.categories.create", compact('categories'));
     }
 
     /**

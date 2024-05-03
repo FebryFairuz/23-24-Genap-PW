@@ -22,9 +22,10 @@
                 </div>
             @endif
             <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
-                <thead>
+                <thead class="ms-10">
                     <tr class="fs-7 fw-bold">
                         <th>Title Book</th>
+                        <th>Categories</th>
                         <th>Author</th>
                         <th>Created At</th>
                         <th>Action</th>
@@ -46,6 +47,16 @@
                                                 <span>{{ $book->author }}</span>
                                             </p>
                                         </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @foreach ($book->categories as $category)
+                                        <div class="badge bg-primary">{{ $category->name }}</div>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <div>
+                                        <div>{{ $book->author }}</div>
                                     </div>
                                 </td>
                                 <td>{{ $book->created_at }}</td>

@@ -12,8 +12,20 @@ class Categories extends Model
 
     protected $fillable = ['name'];
 
-    public function storedData($data){
+
+    public function storedData($data)
+    {
         $results = Categories::create($data);
         return $results;
+    }
+
+    public function addBook($bookId)
+    {
+        $this->books()->attach($bookId);
+    }
+
+    public function books()
+    {
+        return $this->belongsToMany(Books::class, 'book_category', 'category_id', 'book_id');
     }
 }
