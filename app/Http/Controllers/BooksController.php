@@ -41,4 +41,36 @@ class BooksController extends Controller
         }
         return redirect()->to('catalog-books')->withErrors('info', $message);
     }
+
+    public function edit($id){
+        $book = Books::find($id);
+        return view("pertemuan-7.admin_temp.books.edit", [
+            "book" => $book
+        ]);
+    }
+
+
+        public function update(Request $request, Books $books){
+        $newName = [
+            "title" => $request->input("title"),
+            "author" => $request->input("author"),
+            "sinopsis" => $request->input("sinopsis"),
+            "story" => $request->input("story")
+        ];
+
+        $result = $books->where("id", $books->id)->update($newName);
+
+        if ($result) {
+            return redirect()->to('/catalog-books');
+        } else {
+            return back()->with('error', 'Failed to update catalog');
+        }
+    }
+
+    public function destroy(Books $books){
+        $books->delete();
+        return redirect()->to('catalog-books')->with('success', 'detail books deleted');
+    }
+
+
 }

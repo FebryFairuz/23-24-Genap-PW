@@ -28,6 +28,9 @@ Route::controller(BooksController::class)->group(function () {
     Route::get('/catalog-books/create', 'create');
     Route::post('/catalog-books/create', 'store');
     Route::get('/catalog-books/detail', 'show');
+    Route::get('/catalog-books/delete/{books}', 'destroy');
+    Route::get('/catalog-books/update/{books}', 'edit');
+    Route::put('/catalog-books/update/{books}/edit', 'update');
 });
 
 Route::controller(CategoriesController::class)->group(function () {
