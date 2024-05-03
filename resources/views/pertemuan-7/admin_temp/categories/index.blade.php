@@ -40,13 +40,16 @@
                                 <td>{{ $category->created_at }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button class="btn btn-sm btn-icon" type="button">
+                                        <a href="/categories-books/update/{{$category->id}}" class="btn btn-sm btn-icon" type="button">
+                                            <i class="bi bi-pencil text-warning"></i>
+                                        </a>
+                                        <a href="/categories-books/delete/{{$category->id}}">
+                                        <button class="btn btn-sm btn-icon" type="button" onclick="return confirm('Apakah data tersebut mau dihapus?')">
                                             <i class="bi bi-trash text-danger"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-icon" type="button">
-                                            <i class="bi bi-pencil text-warning"></i>
-                                        </button>
+                                        </a>
                                     </div>
+
                                 </td>
                             </tr>
                         @endforeach

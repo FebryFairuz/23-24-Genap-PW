@@ -35,7 +35,11 @@ Route::controller(CategoriesController::class)->group(function () {
     Route::get('/categories-books/create', 'create');
     Route::post('/categories-books/create', 'store');
     Route::get('/categories-books/detail', 'show');
+    Route::get('/categories-books/delete/{categories}', 'destroy');
+    Route::get('/categories-books/update/{categories}', 'edit');
+    Route::put('/categories-books/update/{categories}/edit', 'update');
 });
+
 Route::controller(UsersController::class)->group(function () {
     Route::get('/users-books', 'index');
     Route::get('/users-books/create', 'create');
