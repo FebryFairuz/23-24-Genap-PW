@@ -29,6 +29,14 @@
                         <textarea name="story" required class="form-control" name="story"></textarea>
                     </div>
                     <div class="form-group mb-5">
+                        <label>Categories</label>
+                        <select name="categories[]" required class="form-control" multiple>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mb-5">
                         <label>Image Cover</label>
                         <input type="file" required class="form-control" name="image" />
                     </div>

@@ -15,7 +15,6 @@
             </div>
         </div>
         <div class="card-body">
-            <p class="fw-bolder alert alert-info">Made by Syahrul dan Siti</p>
             @if ($errors->any())
                 <div class="alert alert-info">
                     {{ $errors->info }}
@@ -25,7 +24,7 @@
                 <thead>
                     <tr class="fs-7 fw-bold">
                         <th>Title Book</th>
-                        <th>Author</th>
+                        <th>Categories</th>
                         <th>Created At</th>
                         <th>Action</th>
                     </tr>
@@ -47,6 +46,11 @@
                                             </p>
                                         </div>
                                     </div>
+                                </td>
+                                <td>
+                                    @foreach($book->categories as $category)
+                                        {{ $category->name }},
+                                    @endforeach
                                 </td>
                                 <td>{{ $book->created_at }}</td>
                                 <td>

@@ -16,4 +16,14 @@ class Books extends Model
         $results = Books::create($data);
         return $results;
     }
+
+    public function assignToCategory($categoryId)
+    {
+        $this->categories()->attach($categoryId);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(categories::class, 'book_category', 'book_id', 'category_id');
+    }
 }

@@ -2,27 +2,14 @@
 
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Pertemuan5;
 use App\Http\Controllers\Pertemuan6;
-use App\Models\Categories;
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/home', function(){
-    return view('pertemuan-7.admin_temp.Home');
-});
-Route::get('/profile', function(){
-    return view('pertemuan-7.admin_temp.Profile');
-});
-
-
-Route::get('/', [Pertemuan6::class, 'index']);
-Route::get('/sign-in', [Pertemuan6::class, 'index']);
-Route::get('/sign-in/pa', [Pertemuan6::class, 'signInPA']);
-Route::get('/sign-in/pb', [Pertemuan6::class, 'signInPB']);
-Route::post('/sign-in', [Pertemuan6::class, 'postSignIn']);
-
+Route::get('/', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::controller(BooksController::class)->group(function () {
     Route::get('/catalog-books', 'index');
     Route::get('/catalog-books/create', 'create');
@@ -35,13 +22,37 @@ Route::controller(CategoriesController::class)->group(function () {
     Route::get('/categories-books/create', 'create');
     Route::post('/categories-books/create', 'store');
     Route::get('/categories-books/detail', 'show');
+    Route::get('/categories-books/update/{categories}', 'edit');
+    Route::post('/categories-books/update/{categories}', 'update');
+    Route::get('/categories-books/delete/{categories}', 'destroy');
 });
 Route::controller(UsersController::class)->group(function () {
     Route::get('/users-books', 'index');
     Route::get('/users-books/create', 'create');
     Route::post('/users-books/create', 'store');
     Route::get('/users-books/detail', 'show');
+    Route::get('/users-books/delete/{users}', 'destroy');
+    Route::get('/users-books/update/{users}', 'edit');
+    Route::post('/users-books/update/{users}', 'update');
 });
+
+
+
+
+// Route::get('/home', function(){
+//     return view('pertemuan-7.admin_temp.Home');
+// });
+Route::get('/profile', function(){
+    return view('pertemuan-7.admin_temp.Profile');
+});
+
+
+// Route::get('/', [Pertemuan6::class, 'index']);
+// Route::get('/sign-in', [Pertemuan6::class, 'index']);
+Route::get('/sign-in/pa', [Pertemuan6::class, 'signInPA']);
+Route::get('/sign-in/pb', [Pertemuan6::class, 'signInPB']);
+Route::post('/sign-in', [Pertemuan6::class, 'postSignIn']);
+
 Route::get('/pertemuan-5', [Pertemuan5::class, 'index']);
 Route::get('/pertemuan-5/latihan-pb', [Pertemuan5::class, 'LatihanPB']);
 Route::get('/pertemuan-5/latihan-pa', [Pertemuan5::class, 'LatihanPA']);

@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('fullname', 50);
             $table->enum('gender', ['m', 'f']);
             $table->string('email', 25);
-            $table->string('password', 20);
+            $table->string('password', 100);
             $table->string('no_hp', 15);
+            $table->string('image', 255);
             $table->timestamps();
         });
     }
