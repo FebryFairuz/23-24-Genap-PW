@@ -41,14 +41,20 @@
             </div>
             <div class="card w-100 w-lg-400px">
                 <div class="card-body">
+                    <div class="text-center mb-10">
+                        <h1>Bedtime Stories</h1>
+                        <div class="text-gray-400 fw-bold fs-4">
+                            Sign in with your <span class="text-warning">admin account</span>
+                        </div>
+                    </div>
+                    @if (session('info'))
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            {{ session('info') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    @endif
                     <form action="" method="post" onsubmit="SignSubmit(event)" id="form-sign-in">
                         @csrf
-                        <div class="text-center mb-10">
-                            <h1>Bedtime Stories</h1>
-                            <div class="text-gray-400 fw-bold fs-4">
-                                Sign in with your <span class="text-warning">admin account</span>
-                            </div>
-                        </div>
                         <div class="form-group mb-5">
                             <label class="required fw-bolder">Email</label>
                             <input id="email" type="email" class="form-control" placeholder="name@example.com" name="email">
@@ -112,7 +118,8 @@
 
     const SignSubmit = (e) => {
         e.preventDefault();
-        var formid = e.target.id;
+        var form = e.target;
+        var formid = form.id;
         var target = document.getElementById(formid);
         var myButton = target.getElementsByClassName("btn-submit")[0];
         const errorMsgUsername = target.getElementsByClassName("error-email")[0];
@@ -132,15 +139,12 @@
             errorMsgPassword.textContent = "Password is required!";
             myButton.textContent = "Sign In";
             myButton.disabled = false;
-        } else if (username === "febrid@ibik.ac.id" && password === "ibik123") {
+        } else if(username && password) {
             errorMsgUsername.textContent = "";
             errorMsgPassword.textContent = "";
-            setTimeout(() => {
-                myButton.textContent = "Success Sign In";
-                alert("Welcome !");
-                target.submit();
-            }, 1000);
 
+            //SUBMIT POST KE URL
+            form.submit();
         } else {
             alert("Username or password you enterd is incorrect!");
             myButton.textContent = "Sign In";

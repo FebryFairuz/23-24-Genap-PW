@@ -28,7 +28,8 @@ class UsersController extends Controller
         }
         $user = new Users;
         $user->username = $request->username;
-        $user->password = md5($request->password);
+        //$user->password = md5($request->password);
+        $user->password = $request->password;
         $user->fullname = $request->fullname;
         $user->email = $request->email;
         $user->no_hp = $request->no_hp;
