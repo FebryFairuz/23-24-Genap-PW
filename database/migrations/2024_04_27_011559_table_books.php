@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('sinopsis');
             $table->text('story');
             $table->tinyInteger('is_active');
+            $table->string('latitute',100);
+            $table->string('longtitute',100);
             $table->timestamps();
         });
     }

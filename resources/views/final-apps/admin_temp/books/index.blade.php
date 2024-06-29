@@ -32,50 +32,62 @@
                                     <th class="w-50">Title Book</th>
                                     <th>Categories</th>
                                     <th>Created At</th>
+                                    <th>QR</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (count($books) > 0)
-                                    @foreach ($books as $book)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex">
-                                                    <img class="w-100px rounded"
-                                                        src="{{ url('/assets/media/uploads/books/' . $book->image) }}"
-                                                        alt="{{ $book->title }}">
-                                                    <div class="mx-2">
-                                                        <h3>{{ $book->title }}</h3>
-                                                        <p class="text-dark mb-0">
-                                                            <span class="d-blocks">by </span>
-                                                            <span>{{ $book->author }}</span>
-                                                        </p>
-                                                        <div class="sinopsis text-muted">
-                                                            {{ $book->sinopsis }}
-                                                        </div>
-                                                    </div>
+                                @foreach ($books as $book)
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <img class="w-100px rounded"
+                                                src="{{ url('/assets/media/uploads/books/' . $book->image) }}"
+                                                alt="{{ $book->title }}">
+                                            <div class="mx-2">
+                                                <h3>{{ $book->title }}</h3>
+                                                <p class="text-dark mb-0">
+                                                    <span class="d-blocks">by </span>
+                                                    <span>{{ $book->author }}</span>
+                                                </p>
+                                                <div class="sinopsis text-muted">
+                                                    {{ $book->sinopsis }}
                                                 </div>
-                                            </td>
-                                            <td>
-                                                @foreach ($book->categories as $category)
-                                                    <span class="badge badge-warning">
-                                                        {{ $category->name }}
-                                                    </span>
-                                                @endforeach
-                                            </td>
-                                            <td>{{ $book->created_at }}</td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button class="btn btn-sm btn-icon" type="button">
-                                                        <i class="bi bi-trash text-danger"></i>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-icon" type="button">
-                                                        <i class="bi bi-pencil text-warning"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @foreach ($book->categories as $category)
+                                            <span class="badge badge-warning">
+                                                {{ $category->name }}
+                                            </span>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        <span class="d-block">{{ $book->created_at }}</span>
+                                        <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{ $book->latitute }},{{ $book->longtitute }}" class="btn btn-sm btn-info">
+                                        open map</a>
+                                    </td>
+                                    <td>
+                                        <div class="mt-2">
+                                            {!! QrCode::size(100)->generate($book->id) !!}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-icon" type="button">
+                                                <i class="bi bi-trash text-danger"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-icon" type="button">
+                                                <i class="bi bi-pencil text-warning"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+
                                 @else
                                     <tr>
                                         <td colspan="5">No record found</td>
@@ -90,5 +102,7 @@
 
         </div>
     </div>
+
+
 
 @endsection

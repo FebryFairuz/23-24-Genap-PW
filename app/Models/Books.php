@@ -10,7 +10,7 @@ class Books extends Model
     use HasFactory;
     protected $table = 'books';
 
-    protected $fillable = ['title', 'author', 'sinopsis', 'story', 'image', 'is_active'];
+    protected $fillable = ['title', 'author', 'sinopsis', 'story', 'image', 'is_active', 'latitute', 'longtitute'];
 
     public function storedData($data){
         $results = Books::create($data);

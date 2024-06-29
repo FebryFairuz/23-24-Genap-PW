@@ -33,6 +33,8 @@ class BooksController extends Controller
         $book->sinopsis = $request->sinopsis;
         $book->story = $request->story;
         $book->is_active = 1;
+        $book->latitute = $request->latitute;
+        $book->longtitute = $request->longtitute;
         $book->image = $newFilename;
         $book->save();
 

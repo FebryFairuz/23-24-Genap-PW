@@ -50,9 +50,10 @@
                                                 @endforeach
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="col-12 col-lg-4">
-                                        <div class="bg-light rounded p-5">
+                                        <div class="bg-light rounded p-5 mb-5">
                                             <div class="form-group mb-5">
                                                 <h4>Image Cover</h4>
                                                 <div class="my-5 text-center">
@@ -64,14 +65,25 @@
                                                     id="image" onchange="previewFile()">
                                             </div>
                                         </div>
-
+                                        <div class="form-group">
+                                            <label for="latitude">Latitude:</label>
+                                            <input type="text" id="latitude" name="latitute" class="form-control">
+                                        </div>
+                                        <div class="form-group mb-5">
+                                            <label for="longitude">Longitude:</label>
+                                            <input type="text" id="longitude" name="longtitute" class="form-control">
+                                        </div>
+                                        <button class="btn btn-success" id="openMapBtn" type="button" onclick="openMap()"
+                                            disabled>Open
+                                            Map</button>
                                     </div>
                                 </div>
 
                                 <div class="text-end mt-20 mb-10">
                                     <a href="{{ url('catalog-books') }}" class="py-5 px-10 btn btn-lg btn-light"
                                         type="reset">Cancel</a>
-                                    <button class="py-5 px-10 btn btn-lg btn-primary" type="submit">Save changes</button>
+                                    <button class="py-5 px-10 btn btn-lg btn-primary" id="btn-submit" type="submit">Save
+                                        changes</button>
                                 </div>
 
                             </form>
@@ -81,4 +93,67 @@
 
             </div>
         </div>
+
+        <script>
+            function getLocation() {
+                let getLocationBtn = document.getElementById('btn-submit');
+                getLocationBtn.disabled = true;
+                getLocationBtn.innerText = 'Processing...';
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                    resetButton();
+                }
+            }
+
+            function showPosition(position) {
+                let lat = position.coords.latitude;
+                let lon = position.coords.longitude;
+
+                console.log("Latitude: " + lat + " Longitude: " + lon);
+
+                document.getElementById('latitude').value = lat;
+                document.getElementById('longitude').value = lon;
+
+                let openMapBtn = document.getElementById('openMapBtn');
+                openMapBtn.disabled = false;
+
+                let getLocationBtn = document.getElementById('btn-submit');
+                getLocationBtn.disabled = false;
+                getLocationBtn.innerText = 'Save Changes';
+            }
+
+            function showError(error) {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        alert("User denied the request for Geolocation.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        alert("Location information is unavailable.");
+                        break;
+                    case error.TIMEOUT:
+                        alert("The request to get user location timed out.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert("An unknown error occurred.");
+                        break;
+                }
+                resetButton();
+            }
+
+            function openMap() {
+                let lat = document.getElementById('latitude').value;
+                let lon = document.getElementById('longitude').value;
+                if (lat && lon) {
+                    let url = `https://www.google.com/maps?q=${lat},${lon}`;
+                    window.open(url, '_blank');
+                } else {
+                    alert("Please get the location first.");
+                }
+            }
+
+            getLocation();
+        </script>
     @endsection
